@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anime List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .anime-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .anime-card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+        }
+
+        .anime-card h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .anime-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .anime-card .genre {
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .anime-card .episodes {
+            margin-bottom: 0;
+        }
+
+        .anime-card .actions {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .anime-card .actions a {
+            color: #333;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .add-anime-form {
+            max-width: 400px;
+            margin: 30px auto;
+        }
+
+        .add-anime-form label {
+            font-weight: bold;
+        }
+
+        .add-anime-form input[type="text"],
+        .add-anime-form input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .add-anime-form input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-anime-form input[type="submit"]:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Anime List</h1>
+
+    <div class="anime-container">
+        {% for anime in anime_list %}
+        <div class="anime-card">
+            <h2>{{ anime.title }}</h2>
+            <img src="{{ anime.image_url }}" alt="{{ anime.title }}">
+            <p class="genre">{{ anime.genre }}</p>
+            <p class="episodes">Episodes Watched: {{ anime.episodes_watched }}</p>
+            <div class="actions">
+                <a href="{{ anime.website_url }}" target="_blank">Visit Website</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Add Anime</h2>
+
+    <form class="add-anime-form" action="/add_anime" method="POST">
+        <label for="title">Title:</label>
+        <br>
+        <input type="text" id="title" name="title" required>
+        <br>
+        <label for="genre">Genre:</label>
+        <br>
+        <input type="text" id="genre" name="genre" required>
+        <br>
+        <label for="episodes">Episodes Watched:</label>
+        <br>
+        <input type="number" id="episodes" name="episodes_watched" required>
+        <br>
+        <label for="image">Image URL:</label>
+        <br>
+        <input type="text" id="image" name="image_url" required>
+        <br>
+        <label for="website">Website URL:</label>
+        <br>
+        <input type="text" id="website" name="website_url" required>
+        <br>
+        <input type="submit" value="Add Anime">
+    </form>
+</body>
+</html>
